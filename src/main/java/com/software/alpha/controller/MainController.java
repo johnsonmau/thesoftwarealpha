@@ -14,8 +14,8 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
-    @GetMapping("/videos")
+/*    @GetMapping("/videos")
     public @ResponseBody ResponseEntity<YoutubeResults> getRecentVideos(){
         return mainService.getVideos();
-    }
+    }*/
 }
