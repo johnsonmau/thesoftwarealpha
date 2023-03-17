@@ -17,7 +17,7 @@ public class MainServiceImpl implements MainService {
     @Override
     public ResponseEntity<YoutubeResults> getVideos() {
 
-        String apiKey = "";
+        String apiKey = "";//"AIzaSyA7fDs3bTlK8ztYwahJQ1LKZh-FgRq193Y";
         String channelId = "UC0kEXeqojM8RqUCejco4_jg";
         String part = "snippet";
         String order = "date";

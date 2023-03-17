@@ -11592,10 +11592,17 @@ body {
     font-size: 1.25rem;
   }
 }
-
-.about-section {
+.videos-section {
   padding-top: 10rem;
   background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+.about-section {
+  padding-top: 10rem;
+  background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+.blog-section {
+  padding-top: 10rem;
+  background: rgba(0, 0, 0, 0.8);
 }
 .about-section p {
   margin-bottom: 5rem;
@@ -11686,4 +11693,5 @@ body {
 
 .footer {
   padding: 5rem 0;
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%)!important;
 }

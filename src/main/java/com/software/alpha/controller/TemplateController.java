@@ -3,6 +3,7 @@ package com.software.alpha.controller;
 import com.software.alpha.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -12,8 +13,8 @@ public class TemplateController {
     TemplateService templateService;
 
     @GetMapping("/")
-    public String getIndex(){
-        return templateService.getIndex();
+    public String getIndex(Model model){
+        return templateService.getIndex(model);
     }
 
 }
