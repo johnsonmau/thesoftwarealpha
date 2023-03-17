@@ -7,7 +7,7 @@ public class YoutubeItem {
     private YoutubeVideoId id;
     private String etag;
     @JsonProperty("snippet")
-    private YoutubeVideo videos;
+    private YoutubeVideo video;
 
 
     public YoutubeVideoId getId() {
@@ -26,11 +26,11 @@ public class YoutubeItem {
         this.etag = etag;
     }
 
-    public YoutubeVideo getVideos() {
-        return videos;
+    public YoutubeVideo getVideo() {
+        return video;
     }
 
-    public void setVideos(YoutubeVideo videos) {
-        this.videos = videos;
+    public void setVideo(YoutubeVideo video) {
+        this.video = video;
     }
 }
