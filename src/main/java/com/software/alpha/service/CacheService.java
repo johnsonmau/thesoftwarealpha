@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CacheService {
 
-    ResponseEntity<GenericResponse> cacheVideos();
+    ResponseEntity<GenericResponse> cacheVideos(String auth);
     ResponseEntity<List<CachedVideo>> getCachedVideos();
 
 }

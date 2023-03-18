@@ -20,12 +20,21 @@ public class CacheServiceImpl implements CacheService {
     private final String ORDER = "date";
     private final String URL = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY +
             "&channelId=" + CHANNEL_ID + "&part=" + PART + "&order=" + ORDER;
+    private final String CACHE_AUTH = System.getenv("cache_auth");
 
     @Autowired
     private CachedVideoRepository cachedVideoRepository;
 
     @Override
-    public ResponseEntity<GenericResponse> cacheVideos() {
+    public ResponseEntity<GenericResponse> cacheVideos(String auth) {
+
+        if (auth == null) return createGenericResponse(HttpStatus.UNAUTHORIZED,
+                "must provide authentication parameter");
+        if (auth.trim() == "") return createGenericResponse(HttpStatus.UNAUTHORIZED,
+                "authentication parameter cannot be an empty string");
+
+        if (auth.equals(CACHE_AUTH) == false) return createGenericResponse(HttpStatus.UNAUTHORIZED,
+                "invalid authentication string");
 
         YoutubeResults results;
 
@@ -40,15 +49,16 @@ public class CacheServiceImpl implements CacheService {
         } catch (Exception ex) {
             System.out.println("error calling youtube service " + URL);
             ex.printStackTrace();
-            return createBadRequestResponse(ex.getMessage());
+            return createGenericResponse(HttpStatus.BAD_REQUEST,ex.getMessage());
         }
 
         YoutubeItem[] youtubeItems = results.getItems();
 
-        if (youtubeItems == null) return createBadRequestResponse("youtube service response did not contain items array");
+        if (youtubeItems == null) return createGenericResponse(HttpStatus.BAD_REQUEST,"youtube service response did not contain items array");
 
-        if (youtubeItems.length < 5) return createBadRequestResponse("5 videos weren't returned from the service. " +
+        if (youtubeItems.length < 5) return createGenericResponse(HttpStatus.BAD_REQUEST, "5 videos weren't returned from the service. " +
                 "Unable to update db");
+
 
         for (int i = 1; i <= 5; i++) {
             YoutubeItem youtubeItem = youtubeItems[i - 1];
@@ -64,6 +74,7 @@ public class CacheServiceImpl implements CacheService {
             } catch (EntityNotFoundException ex) {
                 System.out.println("cached video with id ["+i+"] not found. creating new cached video");
                 cachedVideo = new CachedVideo();
+                cachedVideo.setId(i);
             }
 
             cachedVideo.setTitle(title);
@@ -71,7 +82,7 @@ public class CacheServiceImpl implements CacheService {
             cachedVideoRepository.save(cachedVideo);
         }
 
-        return createOkResponse("successfully cached videos");
+        return createGenericResponse(HttpStatus.OK, "successfully cached videos");
 
 
     }
@@ -79,14 +90,6 @@ public class CacheServiceImpl implements CacheService {
     @Override
     public ResponseEntity<List<CachedVideo>> getCachedVideos() {
         return ResponseEntity.status(HttpStatus.OK).body(cachedVideoRepository.findAll());
-    }
-
-    private ResponseEntity<GenericResponse> createOkResponse(String message) {
-        return createGenericResponse(HttpStatus.OK, message);
-    }
-
-    private ResponseEntity<GenericResponse> createBadRequestResponse(String message) {
-        return createGenericResponse(HttpStatus.BAD_REQUEST, message);
     }
 
     private ResponseEntity<GenericResponse> createGenericResponse(HttpStatus httpStatus, String message) {
