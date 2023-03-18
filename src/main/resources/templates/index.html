@@ -56,13 +56,13 @@
                 <h2 class="text-white mb-4">Recent Uploads</h2>
 
                 <div style="background-color: white;">
-                    <div th:if="${items == null}">
-                        <p>Cannot connect to backend Youtube service. Please visit my Youtube channel directly
+                    <div th:if="${cachedVideos.size() == 0}">
+                        <p>There was an issue retrieving recent uploads. Please visit my Youtube channel directly
                             <a href="https://www.youtube.com/@thesoftwarealpha" target="_blank">here</a>.</p>
                     </div>
-                    <div th:if="${items != null}" th:each="item, iter: ${items}">
+                    <div th:if="${cachedVideos != null}" th:each="cachedVideo, iter: ${cachedVideos}">
 
-                        <button th:text="${item.getVideo().getTitle()}" class="btn btn-link" type="button"
+                        <button th:text="${cachedVideo.getTitle()}" class="btn btn-link" type="button"
                                 data-bs-toggle="collapse"
                                 th:data-bs-target="${'#collapseExample'+iter.index}" aria-expanded="false"
                                 aria-controls="collapseExample">
@@ -72,7 +72,7 @@
 
                         <div class="collapse" th:id="${'collapseExample'+iter.index}">
                             <iframe width="560" height="315" th:src="${'https://www.youtube.com/embed/'+
-                            item.getId().getVideoId()}"
+                            cachedVideo.getVideoId()}"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;
                                     picture-in-picture; web-share" allowfullscreen></iframe>
