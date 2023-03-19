@@ -64,14 +64,14 @@
 
                         <button th:text="${cachedVideo.getTitle()}" class="btn btn-link" type="button"
                                 data-bs-toggle="collapse"
-                                th:data-bs-target="${'#collapseExample'+iter.index}" aria-expanded="false"
+                                th:data-bs-target="${'#videoCollapse'+iter.index}" aria-expanded="false"
                                 aria-controls="collapseExample">
                             Button with data-bs-target
                         </button>
 
 
-                        <div class="collapse" th:id="${'collapseExample'+iter.index}">
-                            <iframe width="560" height="315" th:src="${'https://www.youtube.com/embed/'+
+                        <div class="collapse" th:id="${'videoCollapse'+iter.index}">
+                            <iframe class="player" th:src="${'https://www.youtube.com/embed/'+
                             cachedVideo.getVideoId()}"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;
