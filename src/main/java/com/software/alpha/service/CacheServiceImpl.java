@@ -33,6 +33,8 @@ public class CacheServiceImpl implements CacheService {
         if (auth.trim() == "") return createGenericResponse(HttpStatus.UNAUTHORIZED,
                 "authentication parameter cannot be an empty string");
 
+        auth = auth.replace("=", "");
+
         if (auth.equals(CACHE_AUTH) == false) return createGenericResponse(HttpStatus.UNAUTHORIZED,
                 "invalid authentication string");
 

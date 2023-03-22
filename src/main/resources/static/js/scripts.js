@@ -1,5 +1,52 @@
 window.addEventListener('DOMContentLoaded', event => {
 
+    function cardClick(){
+        console.log("click")
+    }
+
+    $('.blogCard').on('mouseover', function(e){
+        const id = $(this).attr('id').replace("blogCard", "")
+        const titleSelector = "#blogCardTitle"+id;
+        $(titleSelector).css({'color': 'rgb(189,242,199)', 'font-style': 'italic'})
+        $('.blogCard').css( 'cursor', 'grab' )
+    })
+
+    $('.blogCard').on('click', function(e){
+        const id = $(this).attr('id').replace("blogCard", "")
+        window.location.href = '/blog/post/retr/'+id;
+    })
+
+    $('.blogCard').on('mouseout', function(){
+        $('.blogCardTitle').css({'color': 'white', 'font-style': 'normal'})
+    })
+
+    $('#refreshButton').on('click', function(){
+
+        $('#refreshSpinner').prop({hidden:false})
+
+        const authKey = $('#authKey').val()
+
+        $.ajax({
+            url: '/cache/videos',
+            type: 'POST',
+            data: authKey,
+            success: function(data) {
+                const message = data.message
+                $('#refreshResponse').css({color: 'green'})
+                $('#refreshResponse').text(message)
+            },
+            error: function(data) {
+                const message = data.responseJSON.message
+                $('#refreshResponse').css({color: 'red'})
+                $('#refreshResponse').text(message)
+            },
+            complete: function(){
+                $('#refreshSpinner').prop({hidden:true})
+            }
+        });
+
+    })
+
     // Navbar shrink function
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
@@ -14,7 +61,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     };
 
-    // Shrink the navbar 
+    // Shrink the navbar
     navbarShrink();
 
     // Shrink the navbar when page is scrolled

@@ -6,4 +6,6 @@ public interface TemplateService {
 
     String getIndex(Model model);
 
+    String getAdmin(Model mode);
+
 }
