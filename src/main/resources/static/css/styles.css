@@ -3760,9 +3760,28 @@ textarea.form-control-lg {
     left: auto;
   }
 }
+@media (max-width: 610px) {
+  .masthead h1 {
+    font-size: 1.5rem!important;
+  }
+}
+@media (max-width: 280px) {
+  #postImg{
+    width: 85%!important;
+    height: 100%!important;
+  }
+  .masthead h1 {
+    font-size: .8rem!important;
+    line-height: 1.5rem!important;
+  }
+}
 @media (max-width: 1200px) {
-  .blogCard, #postImg{
+  .blogCard{
     width: 100%!important;
+    height: 100%!important;
+  }
+  #postImg{
+    width: 85%!important;
     height: 100%!important;
   }
 }
@@ -11564,6 +11583,7 @@ body {
 }
 
 .masthead {
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: auto;
@@ -11576,7 +11596,7 @@ body {
   background-size: cover;
 }
 .masthead h1, .masthead .h1 {
-  font-size: 2.5rem!important;
+  font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgb(189,242,199));
@@ -11600,8 +11620,8 @@ body {
     padding: 0;
   }
   .masthead h1, .masthead .h1 {
-    font-size: 6.5rem;
-    line-height: 6.5rem;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
     letter-spacing: 0.8rem;
   }
   .masthead h2, .masthead .h2 {
