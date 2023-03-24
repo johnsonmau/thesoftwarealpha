@@ -41,13 +41,16 @@
     <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
         <div class="d-flex justify-content-center">
             <div class="text-center">
-                <h1 class="mx-auto my-0" th:if="${blogPost == null}" >Blog post could not be found.</h1>
+                <div th:if="${blogPost == null}">
+                    <img src="/img/sad.jpg" height="225px" width="225" style="padding-bottom: 15px"/>
+                    <h1 class="mx-auto my-0" >Blog post could not be found.</h1>
+                </div>
                 <div th:if="${blogPost != null}">
                     <h1 style="display: inline-block" class="mx-auto my-0" th:text="${blogPost.getTitle()}"></h1>
                     <h6 style="display: inline-block; font-style: italic" class="mx-auto my-0" th:text="${blogPost.getCreated()}"></h6><br>
                     <img id="postImg" style="width: 50%; height: 50%; padding: 20px 0 20px 0" th:src="${'/blog/photo/'+blogPost.getId()}" alt="...">
                 </div>
-                <a class="btn btn-primary" href="#post">Scroll Down</a>
+                <a th:if="${blogPost != null}" class="btn btn-primary" href="#post">Scroll Down</a>
             </div>
         </div>
     </div>
@@ -59,7 +62,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-10">
                 <div style="padding: 0 10px 0 10px">
-                    <p style="white-space: pre-wrap" th:text="${blogPost.getBody()}"></p>
+                    <p style="white-space: pre-wrap" th:if="${blogPost != null}" th:text="${blogPost.getBody()}"></p>
                 </div>
             </div>
         </div>

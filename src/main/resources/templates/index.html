@@ -104,18 +104,23 @@
                     </div>
 
                     <div style="padding-top: 25px" th:if="${blogs != null}" th:each="blog, iter: ${blogs}">
-                        <div th:id="${'blogCard'+blog.getId()}" style="width: 50%; height: 50%; overflow: hidden" class="blogCard card bg-dark text-white mx-auto">
+                        <div th:id="${'blogCard'+blog.getId()}" style="width: 50%; height: 50%; overflow: hidden"
+                             class="blogCard card bg-dark text-white mx-auto">
                             <img style="opacity: .4" th:src="${'/blog/photo/'+blog.getId()}" class="card-img" alt="...">
-                            <div class="card-img-overlay">
-                                <h2 th:id="${'blogCardTitle'+blog.getId()}" class="blogCardTitle card-title" style="font-weight: bolder;" th:text="${blog.getTitle()}"></h2>
-                                <div style="padding-top: 25px; overflow: hidden">
-                                    <span style="display:inline-block; height: 50px; overflow: hidden" class="card-text" th:text="${blog.getBody()}"></span>
-                                    <span>...</span>
-                                    <small style="display: block; font-weight: bold">Open to continue reading</small>
+                            <div class="card-img-overlay"  style="overflow-y: scroll">
+                                <h3 th:id="${'blogCardTitle'+blog.getId()}" class="blogCardTitle card-title"
+                                    style="font-weight: bolder; padding-top: 15px" th:text="${blog.getTitle()}"></h3>
+                                <div style="padding-top: 25px;">
+
+                                    <span class="card-text" th:text="${blog.getBody().substring(0,200)+'... '}"></span>
+                                    <small style="color: rgb(15,23,41);
+                                    font-weight: bolder">Open to continue reading.</small>
                                 </div>
-                                <p style="position: absolute; bottom: 0; right: 0" class="card-text" th:text="${blog.getCreated()}"></p>
+                                <small style="color: rgb(15,23,41); position: absolute; top: 0; right: 2%" class="card-text" th:text="${blog.getCreated()}"></small>
                             </div>
                         </div>
+
+                        <hr>
                     </div>
                 </div>
 

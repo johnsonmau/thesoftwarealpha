@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,6 +39,7 @@ public class TemplateServiceImpl implements TemplateService {
         model.addAttribute("cachedVideos", cachedVideos);
 
         List<BlogPost> blogPosts = blogPostService.getBlogs().getBody();
+        Collections.reverse(blogPosts);
 
         if (blogPosts == null) return INDEX_TEMPLATE;
         model.addAttribute("blogs", blogPosts);
