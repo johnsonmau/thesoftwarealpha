@@ -30,7 +30,8 @@
                 <li class="nav-item" ><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/#blogs">Blog Posts</a></li>
                 <li class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/#about">About</a></li>
-                <li class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/admin">Admin</a></li>
+                <li class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/admin#upload">Manage Blogs</a></li>
+                <li class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/admin#refresh">Refresh Uploads</a></li>
                 <li th:if="${userAuthenticated}" class="nav-item"><a style="color: rgb(100,161,157)!important;" class="nav-link" href="/logout">Logout</a></li>
             </ul>
         </div>
@@ -42,12 +43,6 @@
         <div class="d-flex justify-content-center">
             <div class="text-center">
                 <h1 class="mx-auto my-0">Admin</h1>
-                <br>
-                <!--
-                                <h2 class="text-white-50 mx-auto mt-2 mb-5"></h2>
-                -->
-                <a class="btn btn-primary" href="/admin#upload">Blog Management</a>
-                <a class="btn btn-primary" href="/admin#refresh">Refresh Recent Uploads</a>
             </div>
         </div>
     </div>
@@ -67,12 +62,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="blogPhoto" class="form-label">Photo</label>
-                            <input name="file" accept="image/*" class="form-control-file form-control-lg" id="blogPhoto"
+                            <input name="file" accept="image/*" class="form-control-file form-control" id="blogPhoto"
                                    type="file">
                         </div>
                         <div class="mb-3">
                             <label for="blogBody" class="form-label">Body</label>
-                            <textarea th:field="*{body}" class="form-control" id="blogBody" rows="10"></textarea>
+                            <textarea th:field="*{body}" class="form-control" id="blogBody" rows="20"></textarea>
                         </div>
                     </div>
                     <br>
@@ -83,7 +78,7 @@
         </div>
         <br><Br><Br>
         <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="justify-content-center" style="width: 50%; margin: 0 auto">
+            <div class="justify-content-center" style="width: 90%; margin: 0 auto">
                 <h2 class="section-title mb-4">Delete Blog(s)</h2>
                 <div th:each="blog, iter: ${blogs}">
                     <form th:action="@{/blog/post/delete/} + ${blog.getId()}" method="post">

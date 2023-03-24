@@ -11764,3 +11764,9 @@ body {
 .brand-header {
     font-family: "Source Code Pro";
 }
+section {
+  overflow-x: hidden;
+}
+#postImg{
+  opacity: .8;
+}
